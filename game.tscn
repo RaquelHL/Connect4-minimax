@@ -1,0 +1,202 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/board.png" type="Texture" id=1]
+[ext_resource path="res://board.gd" type="Script" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="board" type="Sprite" parent="."]
+self_modulate = Color( 0.231373, 1, 0.145098, 1 )
+position = Vector2( 502.099, 340.495 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="ColorRect" type="ColorRect" parent="board"]
+show_behind_parent = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -258.0
+margin_top = -217.0
+margin_right = 258.0
+margin_bottom = 221.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.752941, 1, 0.74902, 1 )
+_sections_unfolded = [ "Rect", "Visibility" ]
+
+[node name="Botoes" type="Node" parent="board"]
+
+[node name="btColuna1" type="TextureButton" parent="board/Botoes"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 245.0
+margin_top = 108.0
+margin_right = 322.0
+margin_bottom = 559.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="btColuna2" type="TextureButton" parent="board/Botoes"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 320.0
+margin_top = 108.0
+margin_right = 397.0
+margin_bottom = 559.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="btColuna3" type="TextureButton" parent="board/Botoes"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 395.0
+margin_top = 110.0
+margin_right = 468.0
+margin_bottom = 561.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="btColuna4" type="TextureButton" parent="board/Botoes"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 470.0
+margin_top = 110.0
+margin_right = 543.0
+margin_bottom = 561.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="btColuna5" type="TextureButton" parent="board/Botoes"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 543.0
+margin_top = 108.0
+margin_right = 616.0
+margin_bottom = 559.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="btColuna6" type="TextureButton" parent="board/Botoes"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 620.0
+margin_top = 108.0
+margin_right = 693.0
+margin_bottom = 559.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="btColuna7" type="TextureButton" parent="board/Botoes"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 693.0
+margin_top = 108.0
+margin_right = 766.0
+margin_bottom = 559.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+
+[node name="Tween" type="Tween" parent="board"]
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[node name="Pecas" type="Node2D" parent="board"]
+show_behind_parent = true
+position = Vector2( -222.184, -185.104 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[connection signal="pressed" from="board/Botoes/btColuna1" to="board" method="clicou" binds= [ 1 ]]
+[connection signal="pressed" from="board/Botoes/btColuna2" to="board" method="clicou" binds= [ 2 ]]
+[connection signal="pressed" from="board/Botoes/btColuna3" to="board" method="clicou" binds= [ 3 ]]
+[connection signal="pressed" from="board/Botoes/btColuna4" to="board" method="clicou" binds= [ 4 ]]
+[connection signal="pressed" from="board/Botoes/btColuna5" to="board" method="clicou" binds= [ 5 ]]
+[connection signal="pressed" from="board/Botoes/btColuna6" to="board" method="clicou" binds= [ 6 ]]
+[connection signal="pressed" from="board/Botoes/btColuna7" to="board" method="clicou" binds= [ 7 ]]
