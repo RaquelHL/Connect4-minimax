@@ -4,6 +4,7 @@ var peca = preload("res://peca.tscn")
 
 var prox_peca
 
+var ganhador = 0
 var turno = 1
 var vez = 1
 var cor = {
@@ -31,6 +32,8 @@ func nova_peca():
 	$Pecas.add_child(prox_peca)
 
 func clicou(coluna):
+	if not vez == 1:
+		return
 	joga(coluna)
 
 func checa_ganhador(pos):
@@ -90,7 +93,7 @@ func checa_ganhador(pos):
 	dir = Vector2(1,0)
 	check_pos = pos + dir
 	while(1):
-		if check_pos.y > 5 or check_pos.x < 0:
+		if check_pos.x > 6:
 			break
 		if board[check_pos.x][check_pos.y] != vez or iguais >= 4:
 			break
@@ -100,7 +103,7 @@ func checa_ganhador(pos):
 	
 	check_pos = pos - dir
 	while(1):
-		if check_pos.y < 0 or check_pos.x > 6:
+		if check_pos.x < 0:
 			break
 		if board[check_pos.x][check_pos.y] != vez or iguais >= 4:
 			break
@@ -117,7 +120,7 @@ func checa_ganhador(pos):
 	dir = Vector2(1,1)
 	check_pos = pos + dir
 	while(1):
-		if check_pos.y > 5 or check_pos.x < 0:
+		if check_pos.y > 5 or check_pos.x > 6:
 			break
 		if board[check_pos.x][check_pos.y] != vez or iguais >= 4:
 			break
@@ -127,7 +130,7 @@ func checa_ganhador(pos):
 	
 	check_pos = pos - dir
 	while(1):
-		if check_pos.y < 0 or check_pos.x > 6:
+		if check_pos.y < 0 or check_pos.x < 0:
 			break
 		if board[check_pos.x][check_pos.y] != vez or iguais >= 4:
 			break
@@ -147,7 +150,7 @@ func joga(coluna):
 		pos.y -= 1
 	
 	if(pos.y<0):
-		return
+		return false
 	
 	board[pos.x][pos.y] = vez
 	p.position = Vector2(74*pos.x, -74)
@@ -157,9 +160,12 @@ func joga(coluna):
 	vez *= -1
 	turno += 1
 	nova_peca()
+	
+	return true
 
 func jogador_ganhou():
 	print(vez, ' ganhou')
+	ganhador = vez
 	pass
 
 func _input(event):
