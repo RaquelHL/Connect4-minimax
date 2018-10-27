@@ -1,5 +1,7 @@
 extends Sprite
 
+export(NodePath) var IA
+
 var Estado = preload("res://estado.gd")
 
 
@@ -16,6 +18,7 @@ var cor = {
 var estado_atual = Estado.new()
 
 func _ready():
+	IA = get_node(IA)
 	nova_peca() 
 
 func nova_peca():
@@ -30,7 +33,13 @@ func clicou(coluna):
 	joga(coluna)
 
 	
+func _process(dt):
+	if(ganhador==0):
+		pass#IA.joga()
+
 func joga(coluna):
+	if ganhador !=0:
+		return
 	var p = prox_peca
 	
 	var result = estado_atual.joga(coluna)
@@ -40,17 +49,19 @@ func joga(coluna):
 	p.position = Vector2(74*pos.x, -74)
 	$Tween.interpolate_property(p, "position", p.position, Vector2(74*pos.x, 74*pos.y), 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	$Tween.start()
-	if(estado_atual.checa_ganhador(pos)):
+	if(abs(estado_atual.calc_heuristica(1))>10000):
 		jogador_ganhou()
-	estado_atual.vez *= -1
-	print(estado_atual.calc_heuristica(1))
+	
+	print("h = "+str(estado_atual.calc_heuristica(1)))
 	nova_peca()
 	
+	if estado_atual.vez == -1:
+		IA.joga()
 	return true
 
 func jogador_ganhou():
-	print(estado_atual.vez, ' ganhou')
-	ganhador = estado_atual.vez
+	print(estado_atual.vez*-1, ' ganhou')
+	ganhador = estado_atual.vez*-1
 	pass
 
 		

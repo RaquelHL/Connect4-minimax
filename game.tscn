@@ -12,6 +12,7 @@ position = Vector2( 502.099, 340.495 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
+IA = NodePath("IA")
 
 [node name="ColorRect" type="ColorRect" parent="board"]
 show_behind_parent = true
