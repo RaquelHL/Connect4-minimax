@@ -19,6 +19,7 @@ var pontuacao = 0
 
 #Pra ser usado na arvore do minimax
 var filhos
+var pai
 var folha = false
 
 var ultima_jogada
@@ -55,11 +56,11 @@ func check_pos(pos, dir):
 	var jogador = board[pos.x][pos.y]
 	var seq = 1
 	pos += dir
-	if(pos.x>6 || pos.y > 7):
+	if(pos.x>6 || pos.y > 7 || pos.x < 0 || pos.y < 0):
 		return 0
 	while(board[pos.x][pos.y] == jogador):
 		pos += dir
-		if(pos.x>6 || pos.y > 7):
+		if(pos.x>6 || pos.y > 7 || pos.x < 0 || pos.y < 0):
 			return 0
 		seq += 1
 	
@@ -68,32 +69,32 @@ func check_pos(pos, dir):
 			if seq>=4:
 				return 99999
 			else:
-				return pow(seq,2)
+				return pow(seq,seq)
 		else:
 			return 0
 	else:	#Sequencia bloqueada
 		#print("sequencia de "+str(seq)+" bloqueada")
-		return -pow(seq,3)
+		return -pow(seq,4)
 
 func calc_heuristica(jogador):
 	var h = 0
 	for i in range(0,7):
 		for j in range(0,6):
 			if(board[i][j]==jogador):
-				h+= check_pos(Vector2(i,j), D_DIR)
-				h+= check_pos(Vector2(i,j), D_VER)
-				h+= check_pos(Vector2(i,j), D_DIE)
-				h+= check_pos(Vector2(i,j), D_DID)
+				h+= check_pos(Vector2(i,j), D_DIR)*2
+				h+= check_pos(Vector2(i,j), D_VER)*2
+				h+= check_pos(Vector2(i,j), D_DIE)*2
+				h+= check_pos(Vector2(i,j), D_DID)*2
 			if(board[i][j]==jogador*-1):
-				h-= check_pos(Vector2(i,j), D_DIR)*2
-				h-= check_pos(Vector2(i,j), D_VER)*2
-				h-= check_pos(Vector2(i,j), D_DIE)*2
-				h-= check_pos(Vector2(i,j), D_DID)*2
+				h-= check_pos(Vector2(i,j), D_DIR)
+				h-= check_pos(Vector2(i,j), D_VER)
+				h-= check_pos(Vector2(i,j), D_DIE)
+				h-= check_pos(Vector2(i,j), D_DID)
 		for j in range(5,0,-1):
 			if(board[i][j]==jogador):
-				h+= check_pos(Vector2(i,j), D_ESQ)
+				h+= check_pos(Vector2(i,j), D_ESQ)*2
 			if(board[i][j]==jogador*-1):
-				h-= check_pos(Vector2(i,j), D_ESQ)*2
+				h-= check_pos(Vector2(i,j), D_ESQ)
 	return h
 
 func checa_ganhador(pos):

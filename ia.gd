@@ -42,9 +42,9 @@ func minimax(jogadas, prof):
 	var melhor_h
 	var melhor_coluna
 	if(prof%2==0):
-		melhor_h = -99999
+		melhor_h = -9999999
 	else:
-		melhor_h = 99999
+		melhor_h = 9999999
 
 	for i in range(1,8):
 		var h
@@ -56,32 +56,48 @@ func minimax(jogadas, prof):
 			#print(tabs+"prof "+str(prof)+" na coluna "+str(i))
 			h = minimax(jogadas[i].filhos, prof+1)[1]
 
+
 		opcoes += str(h)+", "
 		if(prof%2==0):	#Max
 			if(h>melhor_h):
 				melhor_h = h
 				melhor_coluna = i
+				jogadas[i].pontuacao = melhor_h
 		else:			#Min
 			if(h<melhor_h):
 				melhor_h = h
 				melhor_coluna = i
+				jogadas[i].pontuacao = melhor_h
+
+
+		#Poda Alpha-Beta
+		if(jogadas[i].pai!=null):
+			if(prof%2==0):	#Sou max -> Pai min
+				if(jogadas[i].pai.pontuacao > jogadas[i].pontuacao):
+					break
+			else:			#Sou min -> Pai max
+				if(jogadas[i].pai.pontuacao < jogadas[i].pontuacao):
+					break
+
+			
 	opcoes += "]"
 	#print(tabs+"prof "+str(prof)+" escolhendo "+str(melhor_coluna)+" com "+str(melhor_h)+" "+opcoes)
 	return [melhor_coluna, melhor_h]
 	pass
 
-func faz_jogadas(board, prof):
+func faz_jogadas(board, prof, pai = null):
 	var jogadas = {}
 	var e
 	for i in range(0,8):
 		e = board.clone()
 		if(e.joga(i)):
 			if(prof<max_prof):
-				e.filhos = faz_jogadas(e, prof+1)
+				e.filhos = faz_jogadas(e, prof+1, e)
 			else:
 				e.pontuacao = e.calc_heuristica(-1)
 				#print(str(prof)+": "+str(e.pontuacao))
 				e.folha = true
+			e.pai = pai
 			jogadas[i] = e
 	
 	return jogadas
