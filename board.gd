@@ -32,7 +32,6 @@ func clicou(coluna):
 #		return
 	joga(coluna)
 
-	
 func _process(dt):
 	if(ganhador==0):
 		pass#IA.joga()
@@ -49,7 +48,8 @@ func joga(coluna):
 	p.position = Vector2(74*pos.x, -74)
 	$Tween.interpolate_property(p, "position", p.position, Vector2(74*pos.x, 74*pos.y), 1, Tween.TRANS_BOUNCE, Tween.EASE_OUT)
 	$Tween.start()
-	if(abs(estado_atual.calc_heuristica(1))>10000):
+	
+	if(abs(estado_atual.calc_heuristica(1, true))>10000):
 		jogador_ganhou()
 	
 	print("h = "+str(estado_atual.calc_heuristica(1)))
@@ -63,11 +63,6 @@ func jogador_ganhou():
 	print(estado_atual.vez*-1, ' ganhou')
 	ganhador = estado_atual.vez*-1
 	pass
-
-		
-		
-			
-	
 
 func _input(event):
 	if(event is InputEventMouseMotion):

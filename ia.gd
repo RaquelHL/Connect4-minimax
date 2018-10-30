@@ -5,7 +5,8 @@ onready var jogo = get_parent()
 var max_prof = 3
 
 func _ready():
-	randomize()
+#	randomize()
+	pass
 
 func jogaBurro():	
 	var e = jogo.estado_atual.clone()	
@@ -20,7 +21,7 @@ func jogaBurro():
 			if(h>max_h or (h==max_h and randf()>0.5)):
 				max_h = h
 				coluna = i
-
+	
 	print("max_h: "+str(max_h)+" em "+str(coluna))
 
 #Minimax
@@ -30,11 +31,10 @@ func joga():
 	var jogada = minimax(arvore, 0)
 	print("jogando em "+str(jogada[0])+": "+str(jogada[1]))
 	jogo.joga(jogada[0])
-
+	
 	pass
 
 func minimax(jogadas, prof):
-
 	var tabs = ""
 	for i in range(0,prof):
 		tabs+='\t'
@@ -55,8 +55,7 @@ func minimax(jogadas, prof):
 		else:
 			#print(tabs+"prof "+str(prof)+" na coluna "+str(i))
 			h = minimax(jogadas[i].filhos, prof+1)[1]
-
-
+		
 		opcoes += str(h)+", "
 		if(prof%2==0):	#Max
 			if(h>melhor_h):
@@ -68,7 +67,7 @@ func minimax(jogadas, prof):
 				melhor_h = h
 				melhor_coluna = i
 				jogadas[i].pontuacao = melhor_h
-
+		
 
 		#Poda Alpha-Beta
 		if(jogadas[i].pai!=null):
@@ -101,4 +100,3 @@ func faz_jogadas(board, prof, pai = null):
 			jogadas[i] = e
 	
 	return jogadas
-			

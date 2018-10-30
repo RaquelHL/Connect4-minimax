@@ -49,19 +49,19 @@ func joga(coluna):
 	ultima_jogada = pos
 	return pos
 	#pontuacao = calc_heuristica(vez)
-	
-		
 
-func check_pos(pos, dir):
+func check_pos(pos, dir, debug = false):
 	var jogador = board[pos.x][pos.y]
 	var seq = 1
 	pos += dir
-	if(pos.x>6 || pos.y > 7 || pos.x < 0 || pos.y < 0):
+	if(pos.x > 6 || pos.y > 5 || pos.x < 0 || pos.y < 0):
 		return 0
 	while(board[pos.x][pos.y] == jogador):
 		pos += dir
-		if(pos.x>6 || pos.y > 7 || pos.x < 0 || pos.y < 0):
+		
+		if(pos.x > 6 || pos.y > 5 || pos.x < 0 || pos.y < 0):
 			return 0
+		
 		seq += 1
 	
 	if(board[pos.x][pos.y] == 0):	#Sequencia valida
@@ -74,9 +74,11 @@ func check_pos(pos, dir):
 			return 0
 	else:	#Sequencia bloqueada
 		#print("sequencia de "+str(seq)+" bloqueada")
+		if seq>=4:
+			return 99999
 		return -pow(seq,4)
 
-func calc_heuristica(jogador):
+func calc_heuristica(jogador, debug = false):
 	var h = 0
 	for i in range(0,7):
 		for j in range(0,6):
@@ -85,16 +87,26 @@ func calc_heuristica(jogador):
 				h+= check_pos(Vector2(i,j), D_VER)*2
 				h+= check_pos(Vector2(i,j), D_DIE)*2
 				h+= check_pos(Vector2(i,j), D_DID)*2
+				h+= check_pos(Vector2(i,j), D_ESQ)*2
+#				if (debug and board[i][j] == 1):
+#					print(i, ' ', j, ' ', check_pos(Vector2(i,j), D_DIR, true))
 			if(board[i][j]==jogador*-1):
 				h-= check_pos(Vector2(i,j), D_DIR)
 				h-= check_pos(Vector2(i,j), D_VER)
 				h-= check_pos(Vector2(i,j), D_DIE)
 				h-= check_pos(Vector2(i,j), D_DID)
-		for j in range(5,0,-1):
-			if(board[i][j]==jogador):
-				h+= check_pos(Vector2(i,j), D_ESQ)*2
-			if(board[i][j]==jogador*-1):
 				h-= check_pos(Vector2(i,j), D_ESQ)
+#				if (debug and board[i][j] == 1):
+#					print(i, ' ', j, ' ', check_pos(Vector2(i,j), D_DIR, true))
+#		for j in range(5,-1,-1):
+#			if(board[i][j]==jogador):
+#				h+= check_pos(Vector2(i,j), D_ESQ)*2
+#				if (debug and jogador == 1):
+#					print(i, ' ', j, ' ', h)
+#			if(board[i][j]==jogador*-1):
+#				h-= check_pos(Vector2(i,j), D_ESQ)
+#				if (debug and jogador == 1):
+#					print(i, ' ', j, ' ', h)
 	return h
 
 func checa_ganhador(pos):
